@@ -1,0 +1,18 @@
+=== REIMBURSEMENT SUMMARY ===
+
+**MERCHANT:** Mone Depot | **DATE:** Not Available | **LOCATION:** Not Available
+
+**LINE ITEMS:**
+• Screwdriver set - $14.99 → **Tools & Equipment** - Essential hand tool for vehicle maintenance and repair.
+• wrench - $10.49 → **Tools & Equipment** - Essential hand tool for vehicle maintenance and repair.
+• Tex - $2.15 → **Sales Tax** - Sales tax on the purchase of tools.
+
+**TOTALS:**
+Subtotal: $25.48
+Tax: $2.15
+**TOTAL: $27.63**
+
+**RECEIPT QUALITY:** C
+
+**FLAGS:**
+⚠️  Missing Date and Location on Receipt

@@ -1,0 +1,10 @@
+Event,File Name,Merchant,Date,Location,Item,Amount,Category,Justification,Needs Approval,Approval Reason,Receipt Total
+FSAE Competition Detroit,receipt_home_depot.png,Mone Depot,Not Available,Not Available,Screwdriver set,14.99,Tools & Equipment,Essential hand tool for mechanical work on the robot.,False,,27.63
+FSAE Competition Detroit,receipt_home_depot.png,Mone Depot,Not Available,Not Available,wrench,10.49,Tools & Equipment,Essential hand tool for mechanical work on the robot.,False,,27.63
+FSAE Competition Detroit,receipt_home_depot.png,Mone Depot,Not Available,Not Available,Tex,2.15,Tax,Sales tax on the purchase.,False,,27.63
+FSAE Competition Detroit,receipt_office_depot.png,office pepot,Not Available,Not Available,Printer Paper,6.99,Office Supplies,"Necessary for printing documents, reports, and presentations.",False,,21.88
+FSAE Competition Detroit,receipt_office_depot.png,office pepot,Not Available,Not Available,uss prive,12.99,Office Supplies,Likely refers to additional office supplies; needs clarification. Could also be a mis-spelling or an unclear entry.,True,Unclear item description. Needs further information to justify the purchase.,21.88
+FSAE Competition Detroit,receipt_office_depot.png,office pepot,Not Available,Not Available,Tex,1.90,Office Supplies,Likely sales tax. Needs confirmation that it applies only to the office supplies and not to any disallowed expense.,True,Tax amount is unclear and needs further clarification regarding its application.,21.88
+FSAE Competition Detroit,receipt_tacobell.png,Taco Bell,Not Available,Not Available,43 combo,8.99,Competition Food,Team meal during a work session or event.,False,,12.32
+FSAE Competition Detroit,receipt_tacobell.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Competition Food,Beverage accompanying a team meal.,False,,12.32
+FSAE Competition Detroit,receipt_tacobell.png,Taco Bell,Not Available,Not Available,Tax,1.04,Competition Food,Sales tax on team meal.,False,,12.32

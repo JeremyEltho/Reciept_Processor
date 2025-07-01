@@ -1,0 +1,19 @@
+=== REIMBURSEMENT SUMMARY ===
+
+**MERCHANT:** Taco Bell | **DATE:** Not Available | **LOCATION:** Not Available
+
+**LINE ITEMS:**
+• Combo Meal - $8.99 → **Competition Food** - Presumed to be a meal during a competition or team event. [NEEDS APPROVAL: Requires more context to confirm it was a competition-related expense.]
+• Large Drink - $2.29 → **Competition Food** - Presumed to be a drink purchased with a meal during a competition or team event. [NEEDS APPROVAL: Requires more context to confirm it was a competition-related expense.]
+• Tax - $1.04 → **Competition Food** - Tax associated with the meal.
+
+**TOTALS:**
+Subtotal: $11.28
+Tax: $1.04
+**TOTAL: $12.32**
+
+**RECEIPT QUALITY:** C
+
+**FLAGS:**
+⚠️  Missing date and location.  Lack of clarity on whether this was a competition-related meal.
+⚠️  Receipt needs additional context for approval.

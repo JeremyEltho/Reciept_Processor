@@ -1,0 +1,19 @@
+=== REIMBURSEMENT SUMMARY ===
+
+**MERCHANT:** office pepot | **DATE:** Not Available | **LOCATION:** Not Available
+
+**LINE ITEMS:**
+• Printer Paper - $6.99 → **Office Supplies** - Necessary for printing documents, reports, and presentations.
+• uss prive - $12.99 → **Office Supplies** - Unclear. Needs clarification.  Potentially USB drive or similar office supplies. [NEEDS APPROVAL: Item description is unclear. Requires clarification before approval.]
+• Tex - $1.90 → **Office Supplies** - Likely sales tax.
+
+**TOTALS:**
+Subtotal: $20.00
+Tax: $1.88
+**TOTAL: $21.88**
+
+**RECEIPT QUALITY:** C
+
+**FLAGS:**
+⚠️  Unclear item description ('uss prive'). Requires clarification.
+⚠️  Receipt lacks date and location.
