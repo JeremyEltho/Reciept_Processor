@@ -1,22 +1,18 @@
 # 🏆 Club Treasurer Receipt Processor
 
-An AI-powered tool for processing receipt images and generating reimbursement summaries for student organizations (FSAE, Robotics, etc.).
+A web-based AI tool for processing receipt images and generating reimbursement summaries for student organizations (FSAE, Robotics, etc.).
 
 ## 📁 Project Structure
 
 ```
 sedai_pet_project/
-├── receipt_processor.py          # Main AI processing engine
+├── receipt_processor.py          # AI processing engine
 ├── web/                          # Flask web interface
 │   ├── app.py                   # Web server
 │   ├── templates/               # HTML templates
 │   ├── uploads/                 # Uploaded receipts
-│   └── results/                 # Web processing results
+│   └── results/                 # Processing results
 ├── test_data/                   # Sample receipt images
-├── results/                     # CLI processing results
-│   ├── single/                  # Single receipt outputs
-│   ├── events/                  # Event-based outputs
-│   └── batch/                   # Batch processing results
 ├── requirements.txt             # Python dependencies
 └── README.md                    # This file
 ```
@@ -46,21 +42,24 @@ sedai_pet_project/
 3. Open browser: `http://127.0.0.1:5000`
 4. Upload receipt and get instant analysis
 
-### Command Line
-```bash
-# Single receipt
-python receipt_processor.py receipt.jpg
+## 🚀 Quick Start
 
-# Event processing
-python receipt_processor.py --event "FSAE Competition" receipt1.png receipt2.jpg
+1. **Install dependencies**: `pip install -r requirements.txt`
+2. **Start web server**: `cd web && python app.py`
+3. **Open browser**: Go to `http://127.0.0.1:5000`
+4. **Upload receipt**: Select any image file and get instant AI analysis
+5. **Download results**: Get formatted summary as downloadable text file
+
+### Optional: Command Line Usage
+```bash
+# Single receipt processing
+python receipt_processor.py receipt.jpg
 
 # Batch processing
 python receipt_processor.py --batch folder_with_receipts/
 ```
 
-## 📋 Processing Modes
-
-### 📊 **Processing Modes**
+## � **Features**
 1. **Single Receipt**: Process individual receipts
 2. **Event Processing**: Group multiple receipts for a single event
 3. **Batch Processing**: Process entire folders of receipts

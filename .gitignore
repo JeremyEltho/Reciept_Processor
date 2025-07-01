@@ -15,7 +15,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Generated results (optional - you might want to keep these)
-results/*/
+# Web app generated files
 web/uploads/
 web/results/
