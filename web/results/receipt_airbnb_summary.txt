@@ -1,0 +1,18 @@
+=== REIMBURSEMENT SUMMARY ===
+
+MERCHANT: Rixbub Booking | DATE: Not Available | LOCATION: Not Available
+
+LINE ITEMS:
+• 3 Nights stay - $240.00 → Travel & Accommodation - Accommodation for team members during a competition or event. [NEEDS APPROVAL: Requires confirmation of the event and team member attendance.]
+• Cleaning Fee - $35.00 → Travel & Accommodation - Cleaning fee associated with the accommodation. [NEEDS APPROVAL: Requires justification for the high cleaning fee. Needs associated receipt from the accommodation.]
+• Service Fee - $20.00 → Travel & Accommodation - Booking service fee.
+
+TOTALS:
+Subtotal: $295.00
+Tax: $0.00
+TOTAL: $295.00
+
+RECEIPT QUALITY: C
+
+FLAGS:
+- Missing date and location.  High cleaning fee requires further justification and receipt.
