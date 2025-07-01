@@ -2,3 +2,4 @@ flask
 werkzeug
 pillow
 google-generativeai
+python-dotenv

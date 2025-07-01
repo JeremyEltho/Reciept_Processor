@@ -1,149 +1,110 @@
-# 🏆 Club Treasurer Receipt Processor
+# Business Receipt Processor
 
-A web-based AI tool for processing receipt images and generating reimbursement summaries for student organizations (FSAE, Robotics, etc.).
+A web-based receipt processing system that analyzes receipt images using computer vision to extract structured expense data. Built with Python, Flask, and Google's Gemini AI for automated receipt parsing.
 
-## 📁 Project Structure
+## Features
 
-```
-sedai_pet_project/
-├── receipt_processor.py          # AI processing engine
-├── web/                          # Flask web interface
-│   ├── app.py                   # Web server
-│   ├── templates/               # HTML templates
-│   ├── uploads/                 # Uploaded receipts
-│   └── results/                 # Processing results
-├── test_data/                   # Sample receipt images
-├── requirements.txt             # Python dependencies
-└── README.md                    # This file
-```
+- **Web Interface**: Upload and process receipts through a clean web interface
+- **Command Line Interface**: Process single receipts, events, or batch folders
+- **Smart Categorization**: Automatically categorizes expenses by type
+- **Approval Workflow**: Flags items that need management approval
+- **Multiple Export Formats**: CSV exports and text summaries
+- **Image Format Support**: PNG, JPG, JPEG, TIFF, BMP
 
-## 🚀 Features
+## Quick Start
 
-### 🏷️ **Vision-Based AI Analysis**
-- Direct image processing using Google's Gemini AI
-- Multi-format support: PNG, JPG, JPEG, TIFF, BMP
-- Superior accuracy compared to OCR-based methods
-
-### 🏷️ **Smart Categorization**
-- **Food & Beverage** (team meals during events/work sessions)
-- **Tools & Equipment** (hardware, parts, manufacturing supplies)
-- **Raw Materials** (aluminum, steel, composites, fasteners)
-- **Travel & Lodging** (gas, flights, hotels for competitions)
-- **Competition Fees** (registration, entry fees)
-- **Software & Subscriptions** (CAD, analysis tools, cloud services)
-- **Office Supplies** (printing, stationery, organization materials)
-- **Miscellaneous** (other valid club expenses)
-
-## 🚀 Quick Start
-
-### Web Interface
-1. Install dependencies: `pip install -r requirements.txt`
-2. Start web server: `cd web && python app.py`
-3. Open browser: `http://127.0.0.1:5000`
-4. Upload receipt and get instant analysis
-
-## 🚀 Quick Start
-
-1. **Install dependencies**: `pip install -r requirements.txt`
-2. **Start web server**: `cd web && python app.py`
-3. **Open browser**: Go to `http://127.0.0.1:5000`
-4. **Upload receipt**: Select any image file and get instant AI analysis
-5. **Download results**: Get formatted summary as downloadable text file
-
-### Optional: Command Line Usage
+1. **Install and setup:**
 ```bash
-# Single receipt processing
-python receipt_processor.py receipt.jpg
-
-# Batch processing
-python receipt_processor.py --batch folder_with_receipts/
+pip install -r requirements.txt && cp .env.example .env
 ```
 
-## � **Features**
-1. **Single Receipt**: Process individual receipts
-2. **Event Processing**: Group multiple receipts for a single event
-3. **Batch Processing**: Process entire folders of receipts
-
-### 🚩 **Quality Control**
-- Receipt quality scoring (A-F grades)
-- Automatic flagging for missing information
-- Approval requirements for high-value items (>$100)
-- Detection of questionable expenses
-
-### 📈 **Finance-Ready Outputs**
-- CSV exports for finance office submission
-- Comprehensive treasurer summary reports
-- Category breakdowns with spending percentages
-- Top vendor analysis
-- Approval queue management
-
-## 📋 Usage
-
-### Prerequisites
+2. **Edit `.env` file and add your API key:**
 ```bash
-cd src/
+# Edit the .env file and replace 'your_gemini_api_key_here' with your actual key
+```
+
+3. **Start the application:**
+```bash
+cd web && python app.py
+```
+
+4. **Open your browser to:** `http://localhost:5000`
+
+## Setup
+
+1. **Install Dependencies**
+```bash
 pip install -r requirements.txt
 ```
 
-Note: Requires Tesseract OCR to be installed on your system.
-
-### Single Receipt Processing
+2. **Configure Environment**
 ```bash
-python src/check.py test_data/receipts/receipt_home_depot.png
-```
-**Output**: `receipt_home_depot_reimbursement_summary.txt`
-
-### Event Processing
-```bash
-python src/check.py --event "FSAE Competition Michigan" test_data/receipts/receipt_*.png
-```
-**Output**: 
-- `Event_YYYYMMDD_HHMMSS_expenses.csv`
-- `Event_YYYYMMDD_HHMMSS_summary.txt`
-
-### Batch Processing
-```bash
-python src/check.py --batch test_data/receipts/
-```
-**Output**:
-- `FolderName_YYYYMMDD_HHMMSS_batch_expenses.csv`
-- `FolderName_YYYYMMDD_HHMMSS_batch_summary.txt`
-
-### Help
-```bash
-python src/check.py --help
+cp .env.example .env
+# Edit .env and add your GEMINI_API_KEY
 ```
 
-## 📊 Sample Output
+3. **Run Web Interface**
+```bash
+cd web
+python app.py
+```
 
-### CSV Export Format
-| Event | File Name | Merchant | Date | Location | Item | Amount | Category | Justification | Needs Approval | Receipt Total |
-|-------|-----------|----------|------|----------|------|--------|----------|---------------|----------------|---------------|
-| FSAE Michigan | receipt_home_depot.png | Home Depot | 06/30/2025 | Detroit, MI | Screwdriver Set | 14.99 | Tools & Equipment | Essential hand tool for vehicle maintenance | false | 27.63 |
+4. **Run Both Frontend and Backend (Recommended)**
+```bash
+# In one terminal - start the web server
+cd web && python app.py &
 
-### Summary Report Features
-- 📊 Financial overview (total spending, receipt counts)
-- 💰 Category breakdowns with percentages
-- 🏪 Top vendor analysis
-- ⚠️ Items requiring approval
-- 🚩 Flagged receipts with quality issues
-- ✅ Actionable recommendations
+# The web interface will be available at http://localhost:5000
+# Backend processing happens automatically when you upload files
+```
 
-## 🎯 Perfect For
-- **FSAE Teams** organizing competition expenses
-- **Robotics Clubs** tracking tool and material purchases
-- **Student Organizations** managing event and operational costs
-- **Club Treasurers** preparing expense reports for submission
+5. **Or Use CLI Only**
+```bash
+python main.py receipt.png
+```
 
-## 🔧 Technical Details
-- **OCR**: Uses Tesseract for text extraction from receipt images
-- **AI**: Leverages Google Gemini for intelligent expense categorization
-- **Formats**: Supports PNG, JPG, JPEG, TIFF, BMP image formats
-- **Export**: CSV and TXT file generation
-- **Processing**: JSON-based structured data handling
+## Project Structure
 
-## 📝 Security Note
-The script includes a fallback API key for testing. For production use, set the `GEMINI_API_KEY` environment variable with your own API key.
+```
+business-receipt-processor/
+├── controllers/          # Business logic controllers
+├── models/              # Data models and AI processing
+├── views/               # Output formatting and file handling
+├── web/                 # Flask web application
+│   ├── templates/       # HTML templates
+│   └── uploads/         # File upload directory
+├── main.py             # CLI entry point
+└── requirements.txt    # Python dependencies
+```
 
-## 🤝 Contributing
-This tool was designed to make club treasurers' lives easier. Feel free to customize categories and approval thresholds for your organization's specific needs.
+## Usage
+
+### Web Interface (Recommended)
+1. Start the application: `cd web && python app.py`
+2. Navigate to `http://localhost:5000`
+3. Upload a receipt image
+4. View processed results and download summary
+
+### CLI Options
+- Single receipt: `python main.py receipt.png`
+- Event processing: `python main.py --event "Team Meeting" receipt1.jpg receipt2.png`
+- Batch processing: `python main.py --batch ./receipts_folder/`
+
+## Output
+
+The system generates:
+- **CSV files**: Structured data for accounting systems
+- **Text summaries**: Human-readable expense reports
+- **Approval flags**: Items requiring management review
+
+## Categories
+
+Expenses are automatically categorized into:
+- Food & Beverage
+- Tools & Equipment
+- Raw Materials
+- Software & Subscriptions
+- Event Fees
+- Travel & Lodging
+- Office Supplies
+- Miscellaneous

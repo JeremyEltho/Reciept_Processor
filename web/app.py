@@ -2,10 +2,14 @@ import os
 import sys
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add parent directory to sys.path for imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from receipt_processor import process_single_receipt, format_single_receipt_summary, save_text_file
+from controllers.receipt_controller import ReceiptController
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 RESULTS_FOLDER = os.path.join(os.path.dirname(__file__), 'results')
@@ -18,13 +22,11 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['RESULTS_FOLDER'] = RESULTS_FOLDER
 
+# Initialize controller
+controller = ReceiptController()
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def save_text_file(filename, content):
-    """Save content to a text file."""
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write(content)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -39,13 +41,13 @@ def upload_file():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             # Process receipt
-            receipt_data = process_single_receipt(filepath)
+            receipt_data = controller.process_single_receipt(filepath)
             if not receipt_data:
                 return render_template('index.html', error='Could not process receipt')
-            summary = format_single_receipt_summary(receipt_data)
+            summary = controller.format_single_receipt_summary(receipt_data)
             result_filename = filename.rsplit('.', 1)[0] + '_summary.txt'
             result_path = os.path.join(app.config['RESULTS_FOLDER'], result_filename)
-            save_text_file(result_path, summary)
+            controller.save_text_file(result_path, summary)
             return render_template('index.html', summary=summary, download_link=url_for('download_file', filename=result_filename))
         else:
             return render_template('index.html', error='Invalid file type. Supported formats: PNG, JPG, JPEG, TIFF, BMP')
