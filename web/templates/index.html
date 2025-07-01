@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Club Treasurer Receipt Uploader</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 36px 32px 32px 32px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.1em;
+            margin-bottom: 28px;
+            color: #2a3a4b;
+        }
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        input[type="file"] {
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 6px 8px;
+            background: #f9fafb;
+        }
+        button {
+            background: #2a7be4;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #1a5bb8;
+        }
+        .summary-box {
+            background: #f8f8f8;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            padding: 22px 18px;
+            margin-top: 24px;
+            white-space: pre-wrap;
+            font-size: 1.08em;
+            color: #222;
+        }
+        .error {
+            color: #d32f2f;
+            background: #fff0f0;
+            border: 1px solid #ffcdd2;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        a {
+            display: inline-block;
+            margin-top: 12px;
+            color: #2a7be4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 18px 6vw 18px 6vw;
+            }
+            h1 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Upload a Receipt (PNG)</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/png">
+        <button type="submit">Upload &amp; Process</button>
+    </form>
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    {% if summary %}
+        <div class="summary-box">{{ summary }}</div>
+        <a href="{{ download_link }}">Download Summary as TXT</a>
+    {% endif %}
+</div>
+</body>
+</html>
