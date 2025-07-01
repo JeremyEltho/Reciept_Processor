@@ -1,0 +1,20 @@
+=== REIMBURSEMENT SUMMARY ===
+
+MERCHANT: Taco Well | DATE: Not Available | LOCATION: Not Available
+
+LINE ITEMS:
+• 43 combo - $8.99 → Food & Beverage - Team meal during competition preparation/event.
+• Large Drink - $2.29 → Food & Beverage - Team meal during competition preparation/event.
+• Tex - $1.04 → Tax - Sales tax on food and beverage.
+
+TOTALS:
+Subtotal: $11.28
+Tax: $1.04
+TOTAL: $12.32
+
+RECEIPT QUALITY: F
+
+FLAGS:
+- Receipt is incomplete; it shows a significantly lower total ($12.32) than the stated amount of $283.  Requires clarification on the discrepancy.
+- Date and Location are missing. This information is necessary for proper record-keeping and audit trail.
+- The large difference between the stated total ($283) and the itemized total ($12.32) suggests there might be additional items missing from the receipt. This needs to be investigated.
