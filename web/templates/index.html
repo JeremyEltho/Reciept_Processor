@@ -92,9 +92,9 @@
 </head>
 <body>
 <div class="container">
-    <h1>Upload a Receipt (PNG)</h1>
+    <h1>Upload a Receipt Image</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/png">
+        <input type="file" name="file" accept="image/*">
         <button type="submit">Upload &amp; Process</button>
     </form>
     {% if error %}

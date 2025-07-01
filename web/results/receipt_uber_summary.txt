@@ -3,16 +3,13 @@
 MERCHANT: Wher Trip | DATE: Not Available | LOCATION: Not Available
 
 LINE ITEMS:
-• Base Fare - $5.00 → Travel - Base fare for transportation likely related to a club event or competition.
-• Distance - $12.75 → Travel - Distance-based charge for transportation, likely part of a ride-sharing or taxi service.
-• Time - $4.25 → Travel - Time-based charge for transportation; could be a surge pricing or waiting fee. Needs clarification. [NEEDS APPROVAL: Requires further information to justify the 'Time' charge.  Provide details about the reason for this additional cost. Was it due to traffic delays related to a club activity, or an unusually long wait?  A brief explanation is required for reimbursement.]
+• Base Fare                                | $   5.00 | Travel & Lodging | Justification: Transportation cost for team members.
+• Distance                                 | $  12.75 | Travel & Lodging | Justification: Additional cost based on travel distance.
+• Time                                     | $   4.25 | Travel & Lodging | Justification: Cost based on travel time.
 
 TOTALS:
 Subtotal: $22.00
-Tax: $0.00
-TOTAL: $22.00
+Tax:      $0.00
+TOTAL:    $22.00
 
 RECEIPT QUALITY: C
-
-FLAGS:
-- Missing date and location.  'Time' charge requires further explanation and approval.

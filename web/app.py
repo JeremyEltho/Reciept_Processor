@@ -3,14 +3,13 @@ import sys
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for
 from werkzeug.utils import secure_filename
 
-# Add src to sys.path for imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
-from model.receipt_model import process_single_receipt
-from view.receipt_view import format_single_receipt_summary, save_text_file
+# Add parent directory to sys.path for imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from receipt_processor import process_single_receipt, format_single_receipt_summary, save_text_file
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 RESULTS_FOLDER = os.path.join(os.path.dirname(__file__), 'results')
-ALLOWED_EXTENSIONS = {'png'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'tiff', 'bmp'}
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
@@ -21,6 +20,11 @@ app.config['RESULTS_FOLDER'] = RESULTS_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def save_text_file(filename, content):
+    """Save content to a text file."""
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(content)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -44,7 +48,7 @@ def upload_file():
             save_text_file(result_path, summary)
             return render_template('index.html', summary=summary, download_link=url_for('download_file', filename=result_filename))
         else:
-            return render_template('index.html', error='Invalid file type. Only PNG allowed.')
+            return render_template('index.html', error='Invalid file type. Supported formats: PNG, JPG, JPEG, TIFF, BMP')
     return render_template('index.html')
 
 @app.route('/results/<filename>')

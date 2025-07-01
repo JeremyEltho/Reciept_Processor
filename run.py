@@ -13,9 +13,9 @@ for sub in ["results/single", "results/events", "results/batch"]:
         if os.path.isfile(fp):
             os.remove(fp)
 
-# Build the command to run the main script
+# Build the command to run the unified script
 args = sys.argv[1:]
-cmd = [sys.executable, os.path.join("src", "main.py")] + args
+cmd = [sys.executable, "receipt_processor.py"] + args
 
 # Run the main script
 subprocess.run(cmd)

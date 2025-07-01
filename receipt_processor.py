@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
+
 """
 Club Treasurer Receipt Processor - Unified Implementation
-Processes receipt images using OCR and AI for expense categorization and reimbursement summaries.
-VERSION 2.1 - Enhanced, Secure, and Refactored
+Processes receipt images using direct AI vision for superior accuracy in expense categorization.
+VERSION 3.0 - Multimodal Vision-Based Analysis
 """
 
 import os
@@ -14,16 +14,7 @@ import glob
 import re
 from datetime import datetime
 from PIL import Image
-import pytesseract
 import google.generativeai as genai
-
-# Try to import OpenCV, provide instructions if it's missing
-try:
-    import cv2
-except ImportError:
-    print("OpenCV library not found. It is required for enhanced OCR.")
-    print("Please install it by running: pip install opencv-python")
-    sys.exit(1)
 
 # --- CONFIGURATION ---
 
@@ -36,63 +27,40 @@ def configure_gemini():
         sys.exit(1)
     
     genai.configure(api_key=api_key)
+    # Use a vision-capable model
     return genai.GenerativeModel("gemini-1.5-flash")
 
 model = configure_gemini()
 
 # --- CORE PROCESSING FUNCTIONS ---
 
-def extract_text_from_image(image_path: str) -> str:
+def analyze_receipt_image(image_path: str, event_name: str = None) -> str:
     """
-    Extract text from receipt image using OCR with OpenCV pre-processing for better accuracy.
+    Use AI's vision capability to directly analyze a receipt image and generate structured data.
+    This replaces the separate OCR step.
     """
     try:
-        # 1. Read the image with OpenCV for pre-processing
-        image = cv2.imread(image_path)
-        if image is None:
-            raise FileNotFoundError(f"Could not read image file: {image_path}")
-
-        # 2. Convert to grayscale
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-        # 3. Apply adaptive thresholding to create a clean, binary image.
-        # This is very effective for receipts with uneven lighting.
-        binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-                                       cv2.THRESH_BINARY, 11, 2)
-
-        # 4. Use Tesseract on the pre-processed image for better OCR results.
-        # --psm 6 assumes a single uniform block of text, which is often good for receipts.
-        custom_config = r'--oem 3 --psm 6'
-        text = pytesseract.image_to_string(binary, config=custom_config)
-        
-        if not text.strip():
-            print(f"Warning: OCR returned no text for {image_path}. The image might be blank or unreadable.")
-        return text
+        image = Image.open(image_path)
+    except FileNotFoundError:
+        print(f"Error: Image file not found at {image_path}")
+        return ""
     except Exception as e:
-        print(f"Error during OCR pre-processing for {image_path}: {e}")
-        # Fallback to the simpler method if OpenCV processing fails
-        try:
-            print("Attempting fallback OCR method...")
-            return pytesseract.image_to_string(Image.open(image_path))
-        except Exception as e2:
-            print(f"Fallback OCR also failed: {e2}")
-            return ""
+        print(f"Error opening image {image_path}: {e}")
+        return ""
 
-def generate_reimbursement_summary(raw_text: str, event_name: str = None) -> str:
-    """Use AI to analyze receipt text and generate structured expense data with an improved prompt."""
     event_context = f"This receipt is for the club event: '{event_name}'." if event_name else ""
     
-    prompt = f"""You are an expert AI assistant for a student engineering club treasurer (e.g., FSAE, Robotics). Your task is to analyze OCR text from a receipt and convert it into a structured JSON format.
+    prompt = f"""You are an expert AI assistant for a student engineering club treasurer (e.g., FSAE, Robotics). Your task is to analyze the provided receipt IMAGE and convert it into a structured JSON format.
 
 **CONTEXT:**
+- You are looking directly at a photo of a receipt. Use your vision capabilities to read all text, including logos and layouts, to understand the contents.
 - The club can only reimburse expenses directly related to its projects.
-- The OCR text is automatically generated and may contain errors, formatting issues, or jumbled lines. Do your best to interpret the messy text.
 {event_context}
 
 **INSTRUCTIONS:**
-1.  **Analyze the Entire Text:** Carefully read the provided OCR text to identify the merchant, date, and line items.
+1.  **Analyze the Image:** Carefully read all text in the image to identify the merchant, date, and line items.
 2.  **Extract Key Information:**
-    - `merchant`: The name of the store or vendor.
+    - `merchant`: The name of the store or vendor. Find it near the top.
     - `date`: The transaction date in "YYYY-MM-DD" format. If unavailable, use "Not Available".
     - `location`: City and State, if present. Otherwise, "Not Available".
     - `receipt_total`, `subtotal`, `tax`: Extract these values precisely as numbers in string format (e.g., "123.45"). If a value is missing, use "0.00".
@@ -107,18 +75,14 @@ def generate_reimbursement_summary(raw_text: str, event_name: str = None) -> str
 4.  **Add Flags:**
     - Create a list of strings in the `flags` field for any major problems, such as "Receipt total does not match sum of line items", "Potentially personal items found", or "Date is missing". **Do not** flag store numbers or transaction IDs.
 5.  **Assess Quality:**
-    - `completeness_score`: Give an A-F grade based on how clear and complete the receipt is. (A=perfect, C=readable but missing info, F=unreadable).
+    - `completeness_score`: Give an A-F grade based on how clear and complete the receipt image is. (A=perfect, C=readable but missing info, F=unreadable).
 
-**OCR TEXT TO ANALYZE:**
-Use code with caution.
-Python
-{raw_text}
-Generated code
 **REQUIRED OUTPUT FORMAT:**
 Your entire response MUST be a single, valid JSON object. Do not include any text, explanations, or markdown formatting outside of the JSON structure itself.
 """
     try:
-        response = model.generate_content(prompt)
+        # The key change: send the prompt and the image together
+        response = model.generate_content([prompt, image])
         return response.text
     except Exception as e:
         print(f"An error occurred during the API call: {e}")
@@ -149,13 +113,13 @@ def parse_receipt_json(json_text: str) -> dict | None:
 
 def process_single_receipt(image_path: str, event_name: str = None) -> dict | None:
     """Process a single receipt image and return structured data."""
-    print(f"  -> Reading and processing image: {os.path.basename(image_path)}")
-    text = extract_text_from_image(image_path)
-    if not text.strip():
-        return None
+    print(f"  -> Sending image for AI analysis: {os.path.basename(image_path)}")
+    ai_response = analyze_receipt_image(image_path, event_name)
     
-    print("  -> Sending to AI for analysis...")
-    ai_response = generate_reimbursement_summary(text, event_name)
+    if not ai_response:
+        print("  -> AI analysis failed.")
+        return None
+
     receipt_data = parse_receipt_json(ai_response)
     
     if receipt_data:
@@ -168,7 +132,7 @@ def process_single_receipt(image_path: str, event_name: str = None) -> dict | No
         
     return receipt_data
 
-# --- REPORTING AND EXPORTING FUNCTIONS ---
+# --- REPORTING AND EXPORTING FUNCTIONS (Unchanged) ---
 
 def format_single_receipt_summary(receipt_data: dict) -> str:
     """Format a single receipt's data into a readable summary."""
@@ -368,7 +332,7 @@ def process_and_generate_reports(image_paths: list[str], event_name: str, output
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Club Treasurer Receipt Processor v2.1',
+        description='Club Treasurer Receipt Processor v3.0 (Vision-Based)',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 MODES OF OPERATION:
@@ -384,7 +348,6 @@ Batch Processing: Processes all images in a folder, using the folder name as the
 
 REQUIREMENTS:
 - Python 3
-- Tesseract OCR engine installed on your system
 - A GEMINI_API_KEY set as an environment variable
 """
     )

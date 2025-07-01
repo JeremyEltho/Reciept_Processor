@@ -21,3 +21,4 @@ sedai_pet_project/
 ├── run.sh               # Shell script runner
 └── README.md            # Main documentation
 ```
+

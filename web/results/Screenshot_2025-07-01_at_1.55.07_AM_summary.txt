@@ -1,0 +1,16 @@
+=== REIMBURSEMENT SUMMARY ===
+
+MERCHANT: KURO RAMEN | DATE: 2024-09-28 | LOCATION: Chicago, IL
+
+LINE ITEMS:
+• House Salad 野菜サラダ                        | $   7.95 | Food & Beverage | Justification: Meal for team members.
+• Deep Fried Soft Shell Crab (2) ソフトシェルクラブのから揚げ | $  15.00 | Food & Beverage | Justification: Meal for team members.
+• Kuro Ramen ラーメン                          | $  16.00 | Food & Beverage | Justification: Meal for team members.
+• ***NEW*** Chicken Katsu Curry チャンカツカレー   | $  18.00 | Food & Beverage | Justification: Meal for team members.
+
+TOTALS:
+Subtotal: $56.95
+Tax:      $6.70
+TOTAL:    $76.38
+
+RECEIPT QUALITY: A

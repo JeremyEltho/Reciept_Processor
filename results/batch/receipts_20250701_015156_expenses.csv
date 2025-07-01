@@ -1,0 +1,20 @@
+Event,File Name,Merchant,Date,Location,Item,Amount,Category,Justification,Needs Approval,Approval Reason,Receipt Total
+receipts,receipt_office_depot.png,office depot,Not Available,Not Available,Printer Paper,6.99,Office Supplies,Printer paper for printing design documents and reports.,False,,21.88
+receipts,receipt_office_depot.png,office depot,Not Available,Not Available,SD Drive,12.99,Tools & Equipment,SD card for storing project data and images.,False,,21.88
+receipts,sample_receipt2.png,Taco Bell,Not Available,Not Available,Combo,8.99,Food & Beverage,Food for team members during a late-night work session.,False,,12.32
+receipts,sample_receipt2.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Food & Beverage,Drinks for team members during a late-night work session.,False,,12.32
+receipts,sample_receipt2.png,Taco Bell,Not Available,Not Available,Tax,1.04,Miscellaneous,Sales tax on food and beverages.,False,,12.32
+receipts,sample_receipt.png,Taco Bell,Not Available,Not Available,Combo,8.99,Food & Beverage,Food for team members during a work session.,False,,12.32
+receipts,sample_receipt.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Food & Beverage,Beverage for team members during a work session.,False,,12.32
+receipts,sample_receipt.png,Taco Bell,Not Available,Not Available,Tax,1.04,Miscellaneous,Sales tax on food and beverages.,False,,12.32
+receipts,receipt_uber.png,Wher Trip,Not Available,Not Available,Base Fare,5.00,Travel & Lodging,Transportation cost for a club-related trip.,False,,22.00
+receipts,receipt_uber.png,Wher Trip,Not Available,Not Available,Distance,12.75,Travel & Lodging,Additional cost based on distance traveled for a club-related trip.,False,,22.00
+receipts,receipt_uber.png,Wher Trip,Not Available,Not Available,Time,4.25,Travel & Lodging,Time-based cost for a club-related trip.,False,,22.00
+receipts,receipt_tacobell.png,Taco Bell,Not Available,Not Available,Combo,8.99,Food & Beverage,Food for team members during a late-night work session.,False,,12.32
+receipts,receipt_tacobell.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Food & Beverage,Beverages for team members during a late-night work session.,False,,12.32
+receipts,receipt_tacobell.png,Taco Bell,Not Available,Not Available,Tax,1.04,Miscellaneous,Sales tax on food and beverages.,False,,12.32
+receipts,receipt_airbnb.png,Rizinb Dooking,Not Available,Not Available,8 Nights stay,240.00,Travel & Lodging,Lodging for team members during a competition or event.,True,High-value item,295.00
+receipts,receipt_airbnb.png,Rizinb Dooking,Not Available,Not Available,Cleaning Fee,35.00,Miscellaneous,Cleaning fee associated with the team's lodging.,False,,295.00
+receipts,receipt_airbnb.png,Rizinb Dooking,Not Available,Not Available,Service Fee,20.00,Miscellaneous,Service fee associated with the lodging.,False,,295.00
+receipts,receipt_home_depot.png,Home Depot,Not Available,Not Available,Screwdriver set,14.99,Tools & Equipment,Essential tools for building and repairing the club's project.,False,,27.63
+receipts,receipt_home_depot.png,Home Depot,Not Available,Not Available,wrench,10.49,Tools & Equipment,Essential tools for building and repairing the club's project.,False,,27.63
