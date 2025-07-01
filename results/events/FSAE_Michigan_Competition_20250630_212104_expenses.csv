@@ -1,7 +1,0 @@
-Event,File Name,Merchant,Date,Location,Item,Amount,Category,Justification,Needs Approval,Approval Reason,Receipt Total
-FSAE Michigan Competition,sample_receipt.png,Taco Bell,Not Available,Not Available,Combo Meal,8.99,Competition Food,Meal purchased during a team event or while traveling for competition.,False,,12.32
-FSAE Michigan Competition,sample_receipt.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Competition Food,Beverage purchased during a team event or while traveling for competition.,False,,12.32
-FSAE Michigan Competition,sample_receipt.png,Taco Bell,Not Available,Not Available,Tax,1.04,Competition Food,Tax on food purchased for the team.,False,,12.32
-FSAE Michigan Competition,sample_receipt2.png,Taco Bell,Not Available,Not Available,Combo Meal,8.99,Competition Food,Meal purchased during a likely work session or event preparation.,False,,12.32
-FSAE Michigan Competition,sample_receipt2.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Competition Food,Drink purchased with the meal.,False,,12.32
-FSAE Michigan Competition,sample_receipt2.png,Taco Bell,Not Available,Not Available,Tax,1.04,Competition Food,Tax associated with the food purchase.,False,,12.32
