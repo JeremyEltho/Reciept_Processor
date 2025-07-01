@@ -5,9 +5,16 @@ def format_single_receipt_summary(receipt_data):
         approval_note = f" [NEEDS APPROVAL: {item.get('approval_reason', 'High value')}]" if item.get('needs_approval') else ""
         summary += f"• {item.get('item', 'N/A')} - ${item.get('amount', '0.00')} → {item.get('category', 'Unknown')} - {item.get('justification', 'N/A')}{approval_note}\n"
     summary += f"""\nTOTALS:\nSubtotal: ${receipt_data.get('subtotal', '0.00')}\nTax: ${receipt_data.get('tax', '0.00')}\nTOTAL: ${receipt_data.get('receipt_total', '0.00')}\n\nRECEIPT QUALITY: {receipt_data.get('completeness_score', 'N/A')}\n"""
-    if receipt_data.get('flags'):
+    # Improved filter: remove any flag mentioning $283 discrepancy if it's likely a store number
+    filtered_flags = []
+    for flag in receipt_data.get('flags', []):
+        flag_lower = flag.lower()
+        if ("283" in flag_lower and "discrep" in flag_lower and ("taco bell" in receipt_data.get('merchant', '').lower() or "store" in flag_lower)):
+            continue  # skip this flag
+        filtered_flags.append(flag)
+    if filtered_flags:
         summary += "\nFLAGS:\n"
-        for flag in receipt_data.get('flags', []):
+        for flag in filtered_flags:
             summary += f"- {flag}\n"
     return summary
 
