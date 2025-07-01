@@ -1,6 +1,0 @@
-Event,File Name,Merchant,Date,Location,Item,Amount,Category,Justification,Needs Approval,Approval Reason,Receipt Total
-test_receipts,sample_receipt2.png,Taco Bell,Not Available,Not Available,Combo Meal,8.99,Competition Food,Assumed to be a meal during a work session or competition.,True,"Requires additional justification; needs context (e.g., date, event, team members present).",12.32
-test_receipts,sample_receipt2.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Competition Food,Drink accompanying a meal; considered part of the meal expense.,True,"Requires additional justification; needs context (e.g., date, event, team members present).",12.32
-test_receipts,sample_receipt2.png,Taco Bell,Not Available,Not Available,Tax,1.04,Competition Food,Tax on food purchased.,False,,12.32
-test_receipts,sample_receipt.png,Taco Bell,Not Available,Not Available,Combo Meal,8.99,Competition Food,Presumed meal during a competition or event.,True,Requires additional context.  Meal cost should be justified with event details.,12.32
-test_receipts,sample_receipt.png,Taco Bell,Not Available,Not Available,Large Drink,2.29,Competition Food,Drink purchased with the meal.,True,Requires additional context related to the event and necessity.,12.32
