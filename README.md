@@ -1,35 +1,64 @@
-# 🏆 Club Treasurer Expense Processor
+# 🏆 Club Treasurer Receipt Processor
 
-A comprehensive receipt processing tool designed specifically for student organizations like FSAE teams, robotics clubs, and other student groups. Automatically categorizes expenses, flags issues, and generates finance-ready reports.
+An AI-powered tool for processing receipt images and generating reimbursement summaries for student organizations (FSAE, Robotics, etc.).
 
 ## 📁 Project Structure
 
 ```
 sedai_pet_project/
-├── src/                          # Source code
-│   ├── check.py                  # Main application
-│   └── requirements.txt          # Python dependencies
-├── test_data/                    # Test receipt images
-│   └── receipts/                 # Sample receipt files
-├── results/                      # Generated outputs
-│   ├── single/                   # Single receipt summaries
-│   ├── events/                   # Event processing results
-│   └── batch/                    # Batch processing results
-└── README.md                     # This file
+├── receipt_processor.py          # Main AI processing engine
+├── web/                          # Flask web interface
+│   ├── app.py                   # Web server
+│   ├── templates/               # HTML templates
+│   ├── uploads/                 # Uploaded receipts
+│   └── results/                 # Web processing results
+├── test_data/                   # Sample receipt images
+├── results/                     # CLI processing results
+│   ├── single/                  # Single receipt outputs
+│   ├── events/                  # Event-based outputs
+│   └── batch/                   # Batch processing results
+├── requirements.txt             # Python dependencies
+└── README.md                    # This file
 ```
 
 ## 🚀 Features
 
+### 🏷️ **Vision-Based AI Analysis**
+- Direct image processing using Google's Gemini AI
+- Multi-format support: PNG, JPG, JPEG, TIFF, BMP
+- Superior accuracy compared to OCR-based methods
+
 ### 🏷️ **Smart Categorization**
-- **Competition Food** (team meals during events/travel)
+- **Food & Beverage** (team meals during events/work sessions)
 - **Tools & Equipment** (hardware, parts, manufacturing supplies)
+- **Raw Materials** (aluminum, steel, composites, fasteners)
 - **Travel & Lodging** (gas, flights, hotels for competitions)
-- **Registration Fees** (competition entries, memberships)
-- **Materials & Consumables** (raw materials, fasteners, fluids)
+- **Competition Fees** (registration, entry fees)
 - **Software & Subscriptions** (CAD, analysis tools, cloud services)
-- **Team Building & Recruitment** (social events, recruitment materials)
 - **Office Supplies** (printing, stationery, organization materials)
-- **Training & Education** (courses, books, certifications)
+- **Miscellaneous** (other valid club expenses)
+
+## 🚀 Quick Start
+
+### Web Interface
+1. Install dependencies: `pip install -r requirements.txt`
+2. Start web server: `cd web && python app.py`
+3. Open browser: `http://127.0.0.1:5000`
+4. Upload receipt and get instant analysis
+
+### Command Line
+```bash
+# Single receipt
+python receipt_processor.py receipt.jpg
+
+# Event processing
+python receipt_processor.py --event "FSAE Competition" receipt1.png receipt2.jpg
+
+# Batch processing
+python receipt_processor.py --batch folder_with_receipts/
+```
+
+## 📋 Processing Modes
 
 ### 📊 **Processing Modes**
 1. **Single Receipt**: Process individual receipts

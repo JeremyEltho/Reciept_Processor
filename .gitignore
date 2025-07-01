@@ -1,6 +1,21 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.egg-info/
 .env
-.DS_Store
-.idea/
+
+# IDE
 .vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated results (optional - you might want to keep these)
+results/*/
+web/uploads/
+web/results/
