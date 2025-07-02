@@ -61,6 +61,85 @@
             font-size: 1.08em;
             color: #222;
         }
+        .chat-container {
+            background: #f8f8f8;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .chat-header {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2a3a4b;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .suggested-questions {
+            margin-bottom: 15px;
+        }
+        .suggested-question {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            cursor: pointer;
+            border: 1px solid #90caf9;
+        }
+        .suggested-question:hover {
+            background: #bbdefb;
+        }
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        .chat-send {
+            background: #2a7be4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .chat-send:hover {
+            background: #1a5bb8;
+        }
+        .chat-messages {
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .user-message {
+            background: #e3f2fd;
+            text-align: right;
+        }
+        .bot-message {
+            background: #f5f5f5;
+            border-left: 3px solid #2a7be4;
+        }
+        .message-label {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
         .error {
             color: #d32f2f;
             background: #fff0f0;
@@ -94,7 +173,7 @@
 <div class="container">
     <h1>Upload a Receipt Image</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*">
+        <input type="file" name="file" accept="image/*" required>
         <button type="submit">Upload &amp; Process</button>
     </form>
     {% if error %}
@@ -103,6 +182,104 @@
     {% if summary %}
         <div class="summary-box">{{ summary }}</div>
         <a href="{{ download_link }}">Download Summary as TXT</a>
+    {% endif %}
+    
+    {% if show_chat %}
+        <div class="chat-container">
+            <div class="chat-header">Ask Questions About Your Receipt</div>
+            
+            {% if suggested_questions %}
+                <div class="suggested-questions">
+                    <div style="margin-bottom: 8px; font-size: 0.9em; color: #666;">Try these questions:</div>
+                    {% for question in suggested_questions %}
+                        <span class="suggested-question" onclick="askSuggestedQuestion('{{ question }}')">{{ question }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Ask a question about your receipt..." onkeypress="handleKeyPress(event)">
+                <button class="chat-send" onclick="sendMessage()">Send</button>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages" style="display: none;">
+                <!-- Chat messages will appear here -->
+            </div>
+        </div>
+        
+        <script>
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function askSuggestedQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
+            
+            if (!question) return;
+            
+            // Add user message
+            addMessage('You', question, 'user-message');
+            
+            // Clear input
+            input.value = '';
+            
+            // Show loading
+            addMessage('Assistant', 'Thinking...', 'bot-message', 'loading');
+            
+            // Send question to backend
+            fetch('/ask_question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remove loading message
+                const loadingMsg = document.querySelector('[data-type="loading"]');
+                if (loadingMsg) loadingMsg.remove();
+                
+                if (data.error) {
+                    addMessage('Assistant', data.error, 'bot-message error');
+                } else {
+                    addMessage('Assistant', data.answer, 'bot-message');
+                }
+            })
+            .catch(error => {
+                // Remove loading message
+                const loadingMsg = document.querySelector('[data-type="loading"]');
+                if (loadingMsg) loadingMsg.remove();
+                
+                addMessage('Assistant', 'Sorry, there was an error processing your question.', 'bot-message error');
+            });
+        }
+        
+        function addMessage(sender, message, className, type = '') {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.style.display = 'block';
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${className}`;
+            if (type) messageDiv.setAttribute('data-type', type);
+            
+            messageDiv.innerHTML = `
+                <div class="message-label">${sender}:</div>
+                <div>${message}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        </script>
     {% endif %}
 </div>
 </body>

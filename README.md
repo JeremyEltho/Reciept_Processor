@@ -10,6 +10,7 @@ A web-based receipt processing system that analyzes receipt images using compute
 - **Approval Workflow**: Flags items that need management approval
 - **Multiple Export Formats**: CSV exports and text summaries
 - **Image Format Support**: PNG, JPG, JPEG, TIFF, BMP
+- **RAG Chatbot**: Ask questions about processed receipts using AI
 
 ## Quick Start
 
@@ -28,7 +29,7 @@ pip install -r requirements.txt && cp .env.example .env
 cd web && python app.py
 ```
 
-4. **Open your browser to:** `http://localhost:5000`
+4. **Open your browser to:** `http://localhost:5002`
 
 ## Setup
 
@@ -81,9 +82,10 @@ business-receipt-processor/
 
 ### Web Interface (Recommended)
 1. Start the application: `cd web && python app.py`
-2. Navigate to `http://localhost:5000`
+2. Navigate to `http://localhost:5002`
 3. Upload a receipt image
 4. View processed results and download summary
+5. **NEW**: Ask questions about your receipt using the chatbot!
 
 ### CLI Options
 - Single receipt: `python main.py receipt.png`

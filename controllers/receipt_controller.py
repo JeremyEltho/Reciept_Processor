@@ -9,6 +9,7 @@ import re
 from datetime import datetime
 
 from models.receipt_model import ReceiptProcessor, ReportGenerator
+from models.rag_model import ReceiptRAG
 from views.receipt_view import ReceiptFormatter, CSVExporter, FileHandler
 
 
@@ -21,6 +22,7 @@ class ReceiptController:
         self.formatter = ReceiptFormatter()
         self.csv_exporter = CSVExporter()
         self.file_handler = FileHandler()
+        self.rag = ReceiptRAG()
     
     def process_single_receipt(self, image_path: str, event_name: str = None) -> dict | None:
         """Process a single receipt and return the data."""
@@ -103,3 +105,15 @@ class ReceiptController:
             print("\n" + summary)
         else:
             print("Could not process the receipt.")
+    
+    def load_receipt_for_questions(self, receipt_data: dict):
+        """Load receipt data into RAG system for questions."""
+        self.rag.load_receipt_context(receipt_data)
+    
+    def ask_receipt_question(self, question: str) -> str:
+        """Ask a question about the loaded receipt."""
+        return self.rag.ask_question(question)
+    
+    def get_suggested_questions(self) -> list:
+        """Get suggested questions for the current receipt."""
+        return self.rag.get_suggested_questions()
