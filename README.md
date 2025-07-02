@@ -10,7 +10,7 @@ A web-based receipt processing system that analyzes receipt images using compute
 - **Approval Workflow**: Flags items that need management approval
 - **Multiple Export Formats**: CSV exports and text summaries
 - **Image Format Support**: PNG, JPG, JPEG, TIFF, BMP
-- **RAG Chatbot**: Ask questions about processed receipts using AI
+- **RAG Chatbot**: Ask questions about processed receipts using AI, rn gemini
 
 ## Quick Start
 
